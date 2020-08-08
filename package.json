@@ -1,0 +1,33 @@
+{
+  "name": "zachary-romsdahl-pictures",
+  "version": "1.0.0",
+  "description": "Pictures Module",
+  "main": "./server/index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "build": "webpack -d --watch"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/FEC-Linka/Zachary-Romsdahl-Pictures.git"
+  },
+  "author": "Zachary Romsdahl",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/FEC-Linka/Zachary-Romsdahl-Pictures/issues"
+  },
+  "homepage": "https://github.com/FEC-Linka/Zachary-Romsdahl-Pictures#readme",
+  "dependencies": {
+    "express": "^4.17.1",
+    "react": "^16.13.1",
+    "react-dom": "^16.13.1"
+  },
+  "devDependencies": {
+    "@babel/core": "^7.11.1",
+    "@babel/preset-env": "^7.11.0",
+    "@babel/preset-react": "^7.10.4",
+    "babel-loader": "^8.1.0",
+    "webpack": "^4.44.1",
+    "webpack-cli": "^3.3.12"
+  }
+}
