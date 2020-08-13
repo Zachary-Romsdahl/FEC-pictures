@@ -5,6 +5,7 @@
   "main": "./server/index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "nodemon ./server/index.js",
     "build": "webpack -d --watch"
   },
   "repository": {
@@ -19,6 +20,7 @@
   "homepage": "https://github.com/FEC-Linka/Zachary-Romsdahl-Pictures#readme",
   "dependencies": {
     "express": "^4.17.1",
+    "nodemon": "^2.0.4",
     "react": "^16.13.1",
     "react-dom": "^16.13.1"
   },
