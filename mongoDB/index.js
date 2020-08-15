@@ -1,3 +1,4 @@
+/* eslint-disable no-console */
 const mongoose = require('mongoose');
 const { pictures, reviewPhotos } = require('./sampleData');
 
@@ -6,42 +7,44 @@ mongoose.connect('mongodb://localhost/pictures', { useUnifiedTopology: true, use
 const db = mongoose.connection;
 
 db.on('error', console.error.bind(console, 'connection error:'));
-db.once('open', function () {
-})
+db.once('open', () => {
+});
 
 const PicturesSchema = mongoose.Schema({
-  item_id: Number,
+  item_id: { type: Number, unique: true },
   store_id: Number,
   item_pictures: [{ large: String, normal: String, thumbnail: String }],
   seller_picture: String,
-  store_picture: String
+  store_picture: String,
 });
 
-//Pictures Collection
-let Pictures = mongoose.model('Pictures', PicturesSchema)
+// Pictures Collection
+const Pictures = mongoose.model('Pictures', PicturesSchema);
 
-//Deletes everything in Pictures collection and replaces them to prevent duplication
-Pictures.deleteMany({})
-  .then(res => {
-    Pictures.create(pictures)
+Pictures.create(pictures)
+  .then(() => {
+    console.log('Filled photos');
   })
-
-
-//ReviewPhotos collection
-const ReviewPhotosSchema = mongoose.Schema(
-  {
-    id: Number,
-    user_picture: String,
-    review_picture: String
+  .catch((err) => {
+    console.log('Error:', err);
   });
 
-let ReviewPhotos = mongoose.model('ReviewPhotos', ReviewPhotosSchema);
+// ReviewPhotos collection
+const ReviewPhotosSchema = mongoose.Schema({
+  id: { type: Number, unique: true },
+  user_picture: String,
+  review_picture: String,
+});
 
-//Deletes everything in Pictures collection and replaces them to prevent duplication
-ReviewPhotos.deleteMany({})
-  .then(res => {
-    ReviewPhotos.create(reviewPhotos)
+const ReviewPhotos = mongoose.model('ReviewPhotos', ReviewPhotosSchema);
+
+ReviewPhotos.create(reviewPhotos)
+  .then(() => {
+    console.log('Filled ReviewPhotos');
   })
+  .catch((err) => {
+    console.log('Error:', err);
+  });
 
 module.exports.Pictures = Pictures;
 module.exports.ReviewPhotos = ReviewPhotos;
