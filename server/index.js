@@ -80,7 +80,7 @@ app.post('/pictures/batch/itemIds', (req, res) => {
 });
 
 // Batch Post Request: return an array of review photos corresponding to incoming ids
-app.post('/reviewPhotos/batch/itemIds', (req, res) => {
+app.post('/reviewPhotos/batch/ids', (req, res) => {
   const ids = req.body.itemIds;
   ReviewPhotos
     .find()
