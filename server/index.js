@@ -4,7 +4,6 @@ const cors = require('cors');
 const { Pictures, ReviewPhotos } = require('../mongoDB/index');
 
 const app = express();
-const port = 3000;
 
 app.use(cors());
 app.use(express.json());
@@ -55,6 +54,10 @@ app.get('/pictures/storeId/:storeId', (req, res) => {
     });
 });
 
+app.get('/test', (req, res) => {
+  res.json({ messge: 'pass!!' });
+});
+
 // Batch Post Request: returns an array of photos corresponding to incoming itemIDs
 app.post('/pictures/batch/itemIds', (req, res) => {
   const { itemIds } = req.body;
@@ -99,7 +102,4 @@ app.post('/reviewPhotos/batch/ids', (req, res) => {
     });
 });
 
-app.listen(port, () => {
-  // eslint-disable-next-line no-console
-  console.log(`Pictures server listening on port ${port}`);
-});
+module.exports.app = app;
