@@ -1,19 +1,47 @@
+import React from 'react';
+import ReactDOM from 'react-dom';
 import axios from 'axios';
+import SideCarousel from './components/sideCarousel.jsx';
+import LargeCarousel from './components/largeCarousel.jsx';
 
-const options = {
-  url: 'http://localhost:3000/reviewPhotos/batch/itemIds',
-  method: 'POST',
-  headers: {
-    Accept: 'application/json',
-    'Content-Type': 'application/json;charset=UTF-8',
-  },
-  data: {
-    itemIds: [1, 2, 4, 7, 15, 20],
-  },
-};
+class Pictures extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      pictures: null,
+      currPicture: null,
+    };
+  }
 
-axios(options)
-  .then((response) => {
-    // eslint-disable-next-line no-console
-    console.log(response.data);
-  });
+  componentDidMount() {
+    const { itemId } = this.props;
+    axios.get('/pictures', {
+      params: {
+        itemId: itemId || 1,
+      },
+    })
+      .then((response) => {
+        const pics = response.data.item_pictures;
+        this.setState({
+          pictures: pics,
+          currPicture: pics[0],
+        });
+      })
+      .catch((error) => {
+        // eslint-disable-next-line no-console
+        console.log(error.response.data.error);
+      });
+  }
+
+  render() {
+    const { pictures, currPicture } = this.state;
+    return (
+      <div>
+        {pictures && <SideCarousel pictures={pictures} clickedPicture={currPicture} />}
+        {currPicture && <LargeCarousel picture={currPicture} />}
+      </div>
+    );
+  }
+}
+
+ReactDOM.render(<Pictures itemId={5} />, document.getElementById('pictures-area'));

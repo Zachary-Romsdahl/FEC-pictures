@@ -4,10 +4,11 @@
   "description": "Pictures Module",
   "main": "./server/index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "nodemon ./server/index.js",
+    "start": "nodemon ./server/start.js",
     "build": "webpack -d --watch",
-    "lint": "eslint"
+    "seedDB": "node ./mongoDB/seed.js",
+    "lint": "eslint",
+    "test": "cross-env NODE_ENV=test jest --testTimeout=10000"
   },
   "repository": {
     "type": "git",
@@ -17,6 +18,12 @@
   "license": "ISC",
   "bugs": {
     "url": "https://github.com/FEC-Linka/Zachary-Romsdahl-Pictures/issues"
+  },
+  "jest": {
+    "testEnvironment": "node",
+    "coveragePathIgnorePatterns": [
+      "/node_modules/"
+    ]
   },
   "homepage": "https://github.com/FEC-Linka/Zachary-Romsdahl-Pictures#readme",
   "dependencies": {
@@ -33,12 +40,15 @@
     "@babel/preset-env": "^7.11.0",
     "@babel/preset-react": "^7.10.4",
     "babel-loader": "^8.1.0",
+    "cross-env": "^7.0.2",
     "eslint": "^7.7.0",
     "eslint-config-airbnb": "^18.2.0",
     "eslint-plugin-import": "^2.22.0",
     "eslint-plugin-jsx-a11y": "^6.3.1",
     "eslint-plugin-react": "^7.20.6",
     "eslint-plugin-react-hooks": "^4.0.8",
+    "jest": "^26.4.0",
+    "supertest": "^4.0.2",
     "webpack": "^4.44.1",
     "webpack-cli": "^3.3.12"
   }

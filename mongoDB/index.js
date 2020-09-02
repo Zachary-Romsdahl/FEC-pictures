@@ -1,6 +1,5 @@
 /* eslint-disable no-console */
 const mongoose = require('mongoose');
-const { pictures, reviewPhotos } = require('./sampleData');
 
 mongoose.connect('mongodb://localhost/pictures', { useUnifiedTopology: true, useNewUrlParser: true });
 
@@ -11,7 +10,7 @@ db.once('open', () => {
 });
 
 const PicturesSchema = mongoose.Schema({
-  item_id: { type: Number, unique: true },
+  item_id: Number,
   store_id: Number,
   item_pictures: [{ large: String, normal: String, thumbnail: String }],
   seller_picture: String,
@@ -21,14 +20,6 @@ const PicturesSchema = mongoose.Schema({
 // Pictures Collection
 const Pictures = mongoose.model('Pictures', PicturesSchema);
 
-Pictures.create(pictures)
-  .then(() => {
-    console.log('Filled photos');
-  })
-  .catch((err) => {
-    console.log('Error:', err);
-  });
-
 // ReviewPhotos collection
 const ReviewPhotosSchema = mongoose.Schema({
   id: { type: Number, unique: true },
@@ -37,14 +28,6 @@ const ReviewPhotosSchema = mongoose.Schema({
 });
 
 const ReviewPhotos = mongoose.model('ReviewPhotos', ReviewPhotosSchema);
-
-ReviewPhotos.create(reviewPhotos)
-  .then(() => {
-    console.log('Filled ReviewPhotos');
-  })
-  .catch((err) => {
-    console.log('Error:', err);
-  });
 
 module.exports.Pictures = Pictures;
 module.exports.ReviewPhotos = ReviewPhotos;
