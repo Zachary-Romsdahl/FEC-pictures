@@ -1,8 +1,16 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import axios from 'axios';
+import styled from 'styled-components';
 import SideCarousel from './components/sideCarousel.jsx';
 import LargeCarousel from './components/largeCarousel.jsx';
+
+export const Grid = styled.div`
+  display: flex;
+  flex-direction: row;
+  height:100%;
+  width: 100%;
+`;
 
 class Pictures extends React.Component {
   constructor(props) {
@@ -14,8 +22,8 @@ class Pictures extends React.Component {
   }
 
   componentDidMount() {
-    const { itemId } = this.props;
-    axios.get('/pictures', {
+    const itemId = window.location.pathname.slice(1);
+    axios.get('http://localhost:3000/pictures', {
       params: {
         itemId: itemId || 1,
       },
@@ -36,12 +44,13 @@ class Pictures extends React.Component {
   render() {
     const { pictures, currPicture } = this.state;
     return (
-      <div>
+      <Grid>
         {pictures && <SideCarousel pictures={pictures} clickedPicture={currPicture} />}
         {currPicture && <LargeCarousel picture={currPicture} />}
-      </div>
+      </Grid>
     );
   }
 }
 
-ReactDOM.render(<Pictures itemId={5} />, document.getElementById('pictures-area'));
+export default Pictures;
+// ReactDOM.render(<Pictures itemId={5} />, document.getElementById('pictures-area'));

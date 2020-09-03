@@ -1,12 +1,13 @@
 /* eslint-disable no-console */
 const mongoose = require('mongoose');
 
-mongoose.connect('mongodb://localhost/pictures', { useUnifiedTopology: true, useNewUrlParser: true });
+mongoose.connect('mongodb://localhost:27017/pictures', { useUnifiedTopology: true, useNewUrlParser: true });
 
 const db = mongoose.connection;
 
 db.on('error', console.error.bind(console, 'connection error:'));
 db.once('open', () => {
+  console.log('Database successfully connected');
 });
 
 const PicturesSchema = mongoose.Schema({
