@@ -39,7 +39,7 @@ const ClickedImage = styled.img`
 `;
 
 function SideCarousel(props) {
-  const { pictures, currPicPos } = props;
+  const { pictures, currPicPos, pictureClick } = props;
   return (
     <Div>
       <List>
@@ -47,12 +47,21 @@ function SideCarousel(props) {
           (i === currPicPos)
             ? (
               <ClickedListItem key={i}>
-                <ClickedImage src={picture.thumbnail} alt={picture.thumbnail} />
+                <ClickedImage
+                  id={i}
+                  src={picture.thumbnail}
+                  alt={picture.thumbnail}
+                />
               </ClickedListItem>
             )
             : (
               <ListItem key={i}>
-                <Image src={picture.thumbnail} alt={picture.thumbnail} />
+                <Image
+                  id={i}
+                  src={picture.thumbnail}
+                  alt={picture.thumbnail}
+                  onClick={(e) => { pictureClick(e); }}
+                />
               </ListItem>
             )))}
       </List>

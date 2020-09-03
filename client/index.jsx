@@ -20,7 +20,8 @@ class Pictures extends React.Component {
       currPicture: null,
       currPicPos: null,
     };
-    this.handleButtonClick = this.handleButtonClick.bind(this);
+    this.handleArrowButtonClick = this.handleArrowButtonClick.bind(this);
+    this.handleSmallPictureClick = this.handleSmallPictureClick.bind(this);
   }
 
   componentDidMount() {
@@ -44,7 +45,7 @@ class Pictures extends React.Component {
       });
   }
 
-  handleButtonClick(e) {
+  handleArrowButtonClick(e) {
     const { pictures, currPicPos } = this.state;
     const numOfPics = pictures.length - 1;
     const { className } = e.target;
@@ -70,6 +71,17 @@ class Pictures extends React.Component {
     });
   }
 
+  handleSmallPictureClick(e) {
+    const { pictures } = this.state;
+    const newPicPos = Number(e.target.id);
+    const newPic = pictures[newPicPos];
+
+    this.setState({
+      currPicture: newPic,
+      currPicPos: newPicPos,
+    });
+  }
+
   render() {
     const { pictures, currPicture, currPicPos } = this.state;
     return (
@@ -77,14 +89,14 @@ class Pictures extends React.Component {
         {pictures && (
           <SideCarousel
             pictures={pictures}
-            currPicture={currPicture}
             currPicPos={currPicPos}
+            pictureClick={this.handleSmallPictureClick}
           />
         )}
         {currPicture && (
           <LargeCarousel
             picture={currPicture}
-            buttonClick={this.handleButtonClick}
+            buttonClick={this.handleArrowButtonClick}
           />
         )}
       </Grid>
