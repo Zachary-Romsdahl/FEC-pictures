@@ -96,6 +96,7 @@ class Pictures extends React.Component {
         {currPicture && (
           <LargeCarousel
             picture={currPicture}
+            currPicPos={currPicPos}
             buttonClick={this.handleArrowButtonClick}
           />
         )}

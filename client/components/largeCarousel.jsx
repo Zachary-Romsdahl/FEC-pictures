@@ -1,36 +1,33 @@
 import React, { useState, useEffect } from 'react';
 import styled from 'styled-components';
 
-function LargeCarousel(props) {
-  const { picture, buttonClick} = props;
-
-  const LargeGrid = styled.div`
-    height: 100%;
-    width: 100%;
-    display: grid;
-    grid-template-rows: 1fr 48px 1fr;
-    grid-template-columns: 60px 1fr 60px;
+const LargeGrid = styled.div`
+  height: 100%;
+  width: 100%;
+  display: grid;
+  grid-template-rows: 1fr 48px 1fr;
+  grid-template-columns: 60px 1fr 60px;
   `;
 
-  const LargePicArea = styled.div`
-    grid-row-start: 1;
-    grid-row-end: 4;
-    grid-column-start: 1;
-    grid-column-end: 4;
-    display:flex;
-    width: 100%;
-    justify-content: center;
-    height: 100%
+const LargePicArea = styled.div`
+  grid-row-start: 1;
+  grid-row-end: 4;
+  grid-column-start: 1;
+  grid-column-end: 4;
+  display:flex;
+  width: 100%;
+  justify-content: center;
+  height: 100%
   `;
-  const Image = styled.img`
-    max-width: 100%;
-    height: 100%;
-    border-radius: 6px;
-    animation-name: web-toolkit-wt-animated--appear-01;
-    animation-duration: 200ms;
-    animation-timing-function: ease-in;
-  `;
-  const ButtonLeft = styled.button`
+const Image = styled.img`
+  max-width: 100%;
+  height: 100%;
+  border-radius: 6px;
+  animation-name: web-toolkit-wt-animated--appear-01;
+  animation-duration: 200ms;
+  animation-timing-function: ease-in;
+`;
+const ButtonLeft = styled.button`
   grid-row-start: 2;
   grid-row-end: 3;
   grid-column-start:1;
@@ -43,13 +40,13 @@ function LargeCarousel(props) {
   padding: 12px;
   border: 0px;
   background-color: #FFFFFF;
-  `;
+`;
 
-  /*
-  Suggestion: to refactor this later to one button component
-  and you could set the grid-column values based on props
-  */
-  const ButtonRight = styled.button`
+/*
+Suggestion: to refactor this later to one button component
+and you could set the grid-column values based on props
+*/
+const ButtonRight = styled.button`
   grid-row-start: 2;
   grid-row-end: 3;
   grid-column-start: 3;
@@ -62,7 +59,10 @@ function LargeCarousel(props) {
   padding: 12px;
   border: 0px;
   background-color: #FFFFFF;
-  `;
+`;
+
+function LargeCarousel(props) {
+  const { picture, currPicPos, buttonClick } = props;
   return (
     <LargeGrid>
       <ButtonLeft className="left-button" onClick={(e) => { buttonClick(e); }}>
@@ -73,7 +73,7 @@ function LargeCarousel(props) {
         </span>
       </ButtonLeft>
       <LargePicArea>
-        <Image src={picture.large} alt="Pending Imagery" />
+        <Image key={currPicPos} src={picture.large} alt="Pending Imagery" />
       </LargePicArea>
       <ButtonRight className="right-button" onClick={(e) => { buttonClick(e); }}>
         <span className="right-button">
