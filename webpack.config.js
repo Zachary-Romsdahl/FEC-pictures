@@ -7,7 +7,6 @@ module.exports = {
   output: {
     filename: '[name].bundle.js',
     path: path.join(__dirname, '/public'),
-    library: 'Pictures',
   },
   module: {
     rules: [
