@@ -40,6 +40,10 @@ const ButtonLeft = styled.button`
   padding: 12px;
   border: 0px;
   background-color: #FFFFFF;
+
+  :hover {
+    background-color: #F9F9F9;
+  }
 `;
 
 /*
@@ -59,6 +63,10 @@ const ButtonRight = styled.button`
   padding: 12px;
   border: 0px;
   background-color: #FFFFFF;
+
+  :hover {
+    background-color: #F9F9F9;
+  }
 `;
 
 function LargeCarousel(props) {

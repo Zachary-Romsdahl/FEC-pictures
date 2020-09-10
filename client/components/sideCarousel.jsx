@@ -3,9 +3,12 @@ import styled from 'styled-components';
 
 const Div = styled.div`
   overflow:hidden;
+  position: relative;
+  width: 66px;
 `;
 
 const List = styled.ul`
+  position: absolute;
   list-style-type: none;
   padding: 0;
   margin-top: 0px;

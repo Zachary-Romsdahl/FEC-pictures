@@ -26,7 +26,7 @@ class Pictures extends React.Component {
 
   componentDidMount() {
     const itemId = window.location.pathname.slice(1);
-    axios.get('http://localhost:3000/pictures', {
+    axios.get('/pictures', {
       params: {
         itemId: itemId || 1,
       },
@@ -105,5 +105,4 @@ class Pictures extends React.Component {
   }
 }
 
-export default Pictures;
-// ReactDOM.render(<Pictures itemId={5} />, document.getElementById('pictures-area'));
+ReactDOM.render(<Pictures />, document.getElementById('pictures-area'));

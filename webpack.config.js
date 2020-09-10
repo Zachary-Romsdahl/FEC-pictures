@@ -2,7 +2,7 @@ const path = require('path');
 
 module.exports = {
   entry: {
-    main: './client/index.jsx',
+    pictures: './client/index.jsx',
   },
   output: {
     filename: '[name].bundle.js',
@@ -19,8 +19,5 @@ module.exports = {
         },
       },
     ],
-  },
-  externals: {
-    react: 'React',
   },
 };
