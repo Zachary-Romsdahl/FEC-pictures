@@ -1,7 +1,10 @@
 /* eslint-disable no-console */
 const mongoose = require('mongoose');
+require('dotenv').config();
 
-mongoose.connect('mongodb://localhost:27017/pictures', { useUnifiedTopology: true, useNewUrlParser: true });
+const uri = process.env.MONGODB_URI || 'localhost';
+
+mongoose.connect(`mongodb://${uri}:27017/pictures`, { useUnifiedTopology: true, useNewUrlParser: true });
 
 const db = mongoose.connection;
 
