@@ -105,4 +105,4 @@ class Pictures extends React.Component {
   }
 }
 
-ReactDOM.render(<Pictures />, document.getElementById('pictures-area'));
+ReactDOM.render(<Pictures />, document.getElementById('pictures'));
