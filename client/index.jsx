@@ -5,11 +5,15 @@ import styled from 'styled-components';
 import SideCarousel from './components/sideCarousel.jsx';
 import LargeCarousel from './components/largeCarousel.jsx';
 
+const PictureContainer = styled.div`
+  padding-left:30px;
+`;
+
 const Grid = styled.div`
   display: flex;
   flex-direction: row;
   height:100%;
-  width: 100%;
+  margin-right:18px;
 `;
 
 class Pictures extends React.Component {
@@ -85,22 +89,24 @@ class Pictures extends React.Component {
   render() {
     const { pictures, currPicture, currPicPos } = this.state;
     return (
-      <Grid>
-        {pictures && (
-          <SideCarousel
-            pictures={pictures}
-            currPicPos={currPicPos}
-            pictureClick={this.handleSmallPictureClick}
-          />
-        )}
-        {currPicture && (
-          <LargeCarousel
-            picture={currPicture}
-            currPicPos={currPicPos}
-            buttonClick={this.handleArrowButtonClick}
-          />
-        )}
-      </Grid>
+      <PictureContainer>
+        <Grid>
+          {pictures && (
+            <SideCarousel
+              pictures={pictures}
+              currPicPos={currPicPos}
+              pictureClick={this.handleSmallPictureClick}
+            />
+          )}
+          {currPicture && (
+            <LargeCarousel
+              picture={currPicture}
+              currPicPos={currPicPos}
+              buttonClick={this.handleArrowButtonClick}
+            />
+          )}
+        </Grid>
+      </PictureContainer>
     );
   }
 }
