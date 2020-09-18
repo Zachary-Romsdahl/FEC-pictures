@@ -1,9 +1,19 @@
 import React, { useState, useEffect } from 'react';
 import styled from 'styled-components';
-
-const LargeGrid = styled.div`
-  height: 100%;
+const LargeGridContainer = styled.div`
+  padding-top: 80%;
   width: 100%;
+  position: relative;
+`;
+const LargeGrid = styled.div`
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  height: 100%;
+  width:100%;
+  max-width: 794px;
   display: grid;
   grid-template-rows: 1fr 48px 1fr;
   grid-template-columns: 60px 1fr 60px;
@@ -21,7 +31,7 @@ const LargePicArea = styled.div`
   `;
 const Image = styled.img`
   max-width: 100%;
-  height: 100%;
+  max-height: 100%;
   border-radius: 6px;
   animation-name: web-toolkit-wt-animated--appear-01;
   animation-duration: 200ms;
@@ -72,25 +82,27 @@ const ButtonRight = styled.button`
 function LargeCarousel(props) {
   const { picture, currPicPos, buttonClick } = props;
   return (
-    <LargeGrid>
-      <ButtonLeft className="left-button" onClick={(e) => { buttonClick(e); }}>
-        <span className="left-button">
-          <svg className="left-button" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" aria-hidden="true" focusable="false">
-            <path className="left-button" d="M16,21a0.994,0.994,0,0,1-.664-0.253L5.5,12l9.841-8.747a1,1,0,0,1,1.328,1.494L8.5,12l8.159,7.253A1,1,0,0,1,16,21Z" />
-          </svg>
-        </span>
-      </ButtonLeft>
-      <LargePicArea>
-        <Image key={currPicPos} src={picture.large} alt="Pending Imagery" />
-      </LargePicArea>
-      <ButtonRight className="right-button" onClick={(e) => { buttonClick(e); }}>
-        <span className="right-button">
-          <svg className="right-button" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" aria-hidden="true" focusable="false">
-            <path className="right-button" d="M8,21a1,1,0,0,1-.664-1.747L15.5,12,7.336,4.747A1,1,0,0,1,8.664,3.253L18.5,12,8.664,20.747A0.994,0.994,0,0,1,8,21Z" />
-          </svg>
-        </span>
-      </ButtonRight>
-    </LargeGrid>
+    <LargeGridContainer>
+      <LargeGrid>
+        <ButtonLeft className="left-button" onClick={(e) => { buttonClick(e); }}>
+          <span className="left-button">
+            <svg className="left-button" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" aria-hidden="true" focusable="false">
+              <path className="left-button" d="M16,21a0.994,0.994,0,0,1-.664-0.253L5.5,12l9.841-8.747a1,1,0,0,1,1.328,1.494L8.5,12l8.159,7.253A1,1,0,0,1,16,21Z" />
+            </svg>
+          </span>
+        </ButtonLeft>
+        <LargePicArea>
+          <Image key={currPicPos} src={picture.large} alt="Pending Imagery" />
+        </LargePicArea>
+        <ButtonRight className="right-button" onClick={(e) => { buttonClick(e); }}>
+          <span className="right-button">
+            <svg className="right-button" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" aria-hidden="true" focusable="false">
+              <path className="right-button" d="M8,21a1,1,0,0,1-.664-1.747L15.5,12,7.336,4.747A1,1,0,0,1,8.664,3.253L18.5,12,8.664,20.747A0.994,0.994,0,0,1,8,21Z" />
+            </svg>
+          </span>
+        </ButtonRight>
+      </LargeGrid>
+    </LargeGridContainer>
   );
 }
 
