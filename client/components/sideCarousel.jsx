@@ -1,10 +1,30 @@
+/* eslint-disable class-methods-use-this */
 import React from 'react';
 import styled from 'styled-components';
 
-const Div = styled.div`
+const SideCarouselWrapper = styled.div`
   overflow:hidden;
   position: relative;
-  width: 66px;
+  min-width: 66px;
+`;
+const CarouselTop = styled.div`
+  height: 60px;
+  width: 60px;
+  position: absolute;
+  top: 0;
+  left: 0;
+  cursor: pointer;
+  z-index: 90;
+`;
+
+const CarouselBottom = styled.div`
+  height: 60px;
+  width: 60px;
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  cursor: pointer;
+  z-index: 90;
 `;
 
 const List = styled.ul`
@@ -12,6 +32,8 @@ const List = styled.ul`
   list-style-type: none;
   padding: 0;
   margin-top: 0px;
+  height: 100%;
+  overflow-y: scroll;
 `;
 const ListItem = styled.li`
   height: 60px;
@@ -24,6 +46,15 @@ const Image = styled.img`
   width: 60px;
   border-radius: 6px;
   opacity: 0.6;
+  cursor: pointer;
+  transition:-property: opacity;
+  transition-duration: 0.1s;
+  transition-timing-function: ease;
+  transition-delay: 0s;
+
+  :hover {
+    opacity: 1.0;
+  }
 `;
 
 const ClickedListItem = styled.li`
@@ -39,37 +70,80 @@ const ClickedImage = styled.img`
   width:56px;
   border-radius: 6px;
   opacity: 1;
+  cursor: pointer;
 `;
 
-function SideCarousel(props) {
-  const { pictures, currPicPos, pictureClick } = props;
-  return (
-    <Div>
-      <List>
-        {pictures.map((picture, i) => (
-          (i === currPicPos)
-            ? (
-              <ClickedListItem key={i}>
-                <ClickedImage
-                  id={i}
-                  src={picture.thumbnail}
-                  alt={picture.thumbnail}
-                />
-              </ClickedListItem>
-            )
-            : (
-              <ListItem key={i}>
-                <Image
-                  id={i}
-                  src={picture.thumbnail}
-                  alt={picture.thumbnail}
-                  onClick={(e) => { pictureClick(e); }}
-                />
-              </ListItem>
-            )))}
-      </List>
-    </Div>
-  );
+class SideCarousel extends React.Component {
+  constructor(props) {
+    super(props);
+
+    this.handleMouseEnterTop = this.handleMouseEnterTop.bind(this);
+    this.handleMouseEnterBottom = this.handleMouseEnterBottom.bind(this);
+  }
+
+  // Handles autoscrolling up
+  handleMouseEnterTop() {
+    const list = document.getElementById('pictures-list');
+    list.scrollTo({ top: 0, behavior: 'smooth' });
+  }
+
+  // Handles autoscrolling down
+  handleMouseEnterBottom() {
+    const list = document.getElementById('pictures-list');
+    list.scrollTo({ top: 5000, behavior: 'smooth' });
+  }
+
+  handleClick(e) {
+    const posY = e.clientY;
+    const list = document.getElementById('pictures-list').childNodes;
+    for (let i = 0; i < list.length; i += 1) {
+      const smallPic = list[i].childNodes[0];
+      const { y } = smallPic.getBoundingClientRect();
+      if (posY > y && posY < y + 60) {
+        smallPic.click();
+        return;
+      }
+    }
+  }
+
+  render() {
+    const { pictures, currPicPos, pictureClick } = this.props;
+    return (
+      <SideCarouselWrapper>
+        <CarouselTop
+          onMouseEnter={(e) => { this.handleMouseEnterTop(e); }}
+          onClick={(e) => { this.handleClick(e); }}
+        />
+        <CarouselBottom
+          onMouseEnter={(e) => { this.handleMouseEnterBottom(e); }}
+          onClick={(e) => { this.handleClick(e); }}
+        />
+        <List id="pictures-list">
+          {pictures.map((picture, i) => (
+            (i === currPicPos)
+              ? (
+                <ClickedListItem key={i}>
+                  <ClickedImage
+                    id={i}
+                    src={picture.thumbnail}
+                    alt={picture.thumbnail}
+                  />
+                </ClickedListItem>
+              )
+              : (
+                <ListItem key={i}>
+                  <Image
+                    id={i}
+                    src={picture.thumbnail}
+                    alt={picture.thumbnail}
+                    onClick={(e) => { pictureClick(e); }}
+                  />
+                </ListItem>
+              )))}
+        </List>
+      </SideCarouselWrapper>
+    );
+  }
 }
 
 export default SideCarousel;

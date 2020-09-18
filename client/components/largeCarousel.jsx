@@ -1,10 +1,12 @@
 import React, { useState, useEffect } from 'react';
 import styled from 'styled-components';
+
 const LargeGridContainer = styled.div`
   padding-top: 80%;
   width: 100%;
   position: relative;
 `;
+
 const LargeGrid = styled.div`
   position: absolute;
   top: 0;
@@ -50,6 +52,7 @@ const ButtonLeft = styled.button`
   padding: 12px;
   border: 0px;
   background-color: #FFFFFF;
+  cursor: pointer;
 
   :hover {
     background-color: #F9F9F9;
@@ -73,6 +76,7 @@ const ButtonRight = styled.button`
   padding: 12px;
   border: 0px;
   background-color: #FFFFFF;
+  cursor: pointer;
 
   :hover {
     background-color: #F9F9F9;
