@@ -23,7 +23,6 @@ app.get('/pictures/batch', (req, res) => {
       .then((items) => {
         const response = items.map((item) => {
           const {
-            // eslint-disable-next-line camelcase
             item_id, store_id, item_pictures, seller_picture, store_picture,
           } = item;
           return ({
@@ -43,7 +42,6 @@ app.get('/pictures/batch', (req, res) => {
       .then((items) => {
         const response = items.map((item) => {
           const {
-            // eslint-disable-next-line camelcase
             item_id, store_id, item_pictures, seller_picture, store_picture,
           } = item;
           return ({
@@ -93,7 +91,6 @@ app.get('/pictures', (req, res) => {
       .then((items) => {
         const response = items.map((item) => {
           const {
-            // eslint-disable-next-line camelcase
             item_id, store_id, item_pictures, seller_picture, store_picture,
           } = item;
           return ({
@@ -113,7 +110,6 @@ app.get('/pictures', (req, res) => {
       .then((items) => {
         const response = items.map((item) => {
           const {
-            // eslint-disable-next-line camelcase
             item_id, store_id, item_pictures, seller_picture, store_picture,
           } = item;
           return ({

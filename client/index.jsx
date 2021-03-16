@@ -2,8 +2,8 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import axios from 'axios';
 import styled from 'styled-components';
-import SideCarousel from './components/sideCarousel.jsx';
-import LargeCarousel from './components/largeCarousel.jsx';
+import SideCarousel from './components/sideCarousel/sideCarousel.jsx';
+import LargeCarousel from './components/largeCarousel/largeCarousel.jsx';
 
 const PictureContainer = styled.div`
   padding-left:30px;
