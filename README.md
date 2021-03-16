@@ -1,4 +1,4 @@
-# Pictures Module
+# Pictures Service for E-Commerce Application
 
 To start server: npm run start
 
